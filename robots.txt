@@ -35,4 +35,4 @@ Disallow: /
 User-agent: YouBot
 Disallow: /
 
-Sitemap: https://qubito.polito.it/sitemap.xml
+Sitemap: https://qubito-team.github.io/sitemap.xml

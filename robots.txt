@@ -1,13 +1,9 @@
-# Allow all legitimate search engine crawlers
+# Search engines: the whole site, except the content editor.
 User-agent: *
 Allow: /
-Disallow: /tags/
-Disallow: /categories/
-Disallow: /authors/
-Disallow: /series/
-Disallow: /search/
+Disallow: /admin/
 
-# Block AI content scrapers that do not contribute to search indexing
+# AI content scrapers that do not contribute to search indexing (the same list as the previous site).
 User-agent: GPTBot
 Disallow: /
 
@@ -35,4 +31,4 @@ Disallow: /
 User-agent: YouBot
 Disallow: /
 
-Sitemap: https://qubito.polito.it/sitemap.xml
+Sitemap: https://qubito.polito.it/sitemap-index.xml

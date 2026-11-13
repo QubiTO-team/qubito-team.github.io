@@ -1,0 +1,62 @@
+# Written by the build (src/lib/htaccess.ts): edit that file, not this one.
+
+# Addresses of the previous site.
+RedirectMatch 301 ^/articles/hardware_superconducting_qubits_08_05_2025_gvpgje/superconducting-qubits/?$ /articles/superconducting-qubits/
+RedirectMatch 301 ^/en/articles/hardware_superconducting_qubits_08_05_2025_gvpgje/superconducting-qubits/?$ /en/articles/superconducting-qubits/
+RedirectMatch 301 ^/forms/join-us/?$ /join-us/
+RedirectMatch 301 ^/en/forms/join-us/?$ /en/join-us/
+RedirectMatch 301 ^/thankyou/?$ /join-us/
+RedirectMatch 301 ^/en/thankyou/?$ /en/join-us/
+RedirectMatch 301 ^/forms/thankyou/?$ /join-us/
+RedirectMatch 301 ^/en/forms/thankyou/?$ /en/join-us/
+RedirectMatch 301 ^/en/forms/qubito-quantum-days-form/?$ /en/activities/qubito-quantum-days/
+RedirectMatch 301 ^/en/forms/qubito-quantum-days-thankyou/?$ /en/activities/qubito-quantum-days/
+RedirectMatch 301 ^/forms/?$ /
+RedirectMatch 301 ^/en/forms/?$ /en/
+RedirectMatch 301 ^/snippets/?$ /
+RedirectMatch 301 ^/en/snippets/?$ /en/
+RedirectMatch 301 ^/it/?$ /
+RedirectMatch 301 ^/(en/)?(tags|categories|authors|series)(/.*)?$ /$1articles/
+RedirectMatch 301 ^/(it/|en/)?sitemap\.xml$ /sitemap-index.xml
+
+# Page not found, in the language of the address.
+ErrorDocument 404 /404.html
+<If "%{REQUEST_URI} =~ m#^/en/#">
+  ErrorDocument 404 /en/404/index.html
+</If>
+
+AddDefaultCharset utf-8
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType font/ttf .ttf
+  AddType model/gltf-binary .glb
+  AddType application/wasm .wasm
+  AddType application/manifest+json .webmanifest
+  AddType text/javascript .js .mjs
+  AddCharset utf-8 .css .js .mjs .json .xml .txt .svg .webmanifest
+</IfModule>
+
+<IfModule mod_deflate.c>
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json application/manifest+json application/xml application/rss+xml text/xml text/plain image/svg+xml model/gltf-binary application/wasm
+  </IfModule>
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Files in _astro/ change name whenever their content changes.
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <Else>
+    Header set Cache-Control "no-cache"
+  </Else>
+
+  # The pages can be framed only by the site itself (the meta tag of the CSP cannot say so).
+  Header always set Content-Security-Policy "frame-ancestors 'self'"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

@@ -1,0 +1,1 @@
+var e=!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;for(let t of document.querySelectorAll(`a[href="#top"]`))t.addEventListener(`click`,t=>{e&&(t.preventDefault(),window.scrollTo({top:0,behavior:`smooth`}),document.getElementById(`main`)?.focus({preventScroll:!0}))});
